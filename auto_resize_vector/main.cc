@@ -6,7 +6,16 @@ private:
 	size_t ntop;
 	int *data;
 public:
-	bector (size_t s) : data(new int[s]), nsize(s), ntop(0) {}
+	explicit bector (size_t s) : data(new int[s]), nsize(s), ntop(0)
+	{
+		for(int i=0;i<s;i++)
+			*(data+i) = 0;	
+	}	
+	explicit bector (size_t s, int _data): data(new int[s]), nsize(s), ntop(0)
+	{
+		for(int i=0;i<s;i++)
+			*(data+i) = _data;
+	}
 	~bector () { std::cout << "delete" << std::endl; delete[] data; }
 
 	size_t size() { return ntop; }
@@ -17,11 +26,10 @@ public:
 		*(data+ntop) = _data;
 		ntop++;
 	}	
-	int pop()
+	void pop()
 	{
-		int temp = *(data+ntop);
-		*(data+ntop) = 0;
-		return temp;
+		int pop_ntop = static_cast<int>(ntop);
+		std::cout << "pop_ntop: " << pop_ntop << std::endl;	
 	}
 	void print()
 	{
@@ -33,12 +41,14 @@ public:
 
 int main(void)
 {
-	bector *b = new bector(3);
-	b->append(1);
+	bector *b = new bector(5, 2);
 	b->append(2);
-	b->append(3);
+	std::cout << "ntop: " << b->size() << std::endl; 
+	b->append(4);
+	std::cout << "ntop: " << b->size() << std::endl;
 	b->print();
-	std::cout << b->size() << "," <<  b->capacity() << std::endl;
+	//std::cout << b->size() << "," <<  b->capacity() << std::endl;
+	//b->pop();
 	delete b;
 	return 0;	
 }

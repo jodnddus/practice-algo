@@ -21,19 +21,16 @@ public:
 	size_t size() { return ntop; }
 	size_t capacity() { return nsize; }	
 
+	void pop() { ntop--; }
+
 	void append(int _data)
 	{
 		*(data+ntop) = _data;
 		ntop++;
 	}	
-	void pop()
-	{
-		int pop_ntop = static_cast<int>(ntop);
-		std::cout << "pop_ntop: " << pop_ntop << std::endl;	
-	}
 	void print()
 	{
-		for(int i=0;i<nsize;i++)
+		for(int i=0;i<ntop;i++)
 			std::cout << *(data+i) << std::endl;
 	}
 	
@@ -46,9 +43,16 @@ int main(void)
 	std::cout << "ntop: " << b->size() << std::endl; 
 	b->append(4);
 	std::cout << "ntop: " << b->size() << std::endl;
+	b->append(6);
+	std::cout << "ntop: " << b->size() << std::endl;
 	b->print();
 	//std::cout << b->size() << "," <<  b->capacity() << std::endl;
-	//b->pop();
+	b->pop();
+	b->print();
+	b->append(8);
+	std::cout << "ntop: " << b->size() << std::endl;
+	b->print();
+	b->pop();
 	delete b;
 	return 0;	
 }

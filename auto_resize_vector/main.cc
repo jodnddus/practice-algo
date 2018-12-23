@@ -22,7 +22,6 @@ public:
 	size_t capacity() { return nsize; }	
 
 	void pop() { ntop--; }
-
 	void append(int _data)
 	{
 		*(data+ntop) = _data;
@@ -33,7 +32,15 @@ public:
 		for(int i=0;i<ntop;i++)
 			std::cout << *(data+i) << std::endl;
 	}
-	
+	int at(int index)
+	{
+		if(index < 0 || index > ntop)
+		{
+			std::cout << "index out range" << std::endl;
+			return 0;
+		}
+		return *(data+index);
+	}
 };
 
 int main(void)
@@ -53,6 +60,8 @@ int main(void)
 	std::cout << "ntop: " << b->size() << std::endl;
 	b->print();
 	b->pop();
+	std::cout<< "at(0): " << b->at(0) << std::endl;
+	std::cout<< "at(1): " << b->at(1) << std::endl;
 	delete b;
 	return 0;	
 }

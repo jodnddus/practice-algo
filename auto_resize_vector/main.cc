@@ -63,6 +63,12 @@ public:
 			std::cout << st << std::endl;
 		}
 	}
+	void remove(int index)
+	{
+		for(int i=index;i<ntop;i++)
+			*(data+i) = *(data+i+1);
+		ntop--;
+	}
 };
 
 int main(void)
@@ -85,6 +91,8 @@ int main(void)
 	std::cout<< "at(1): " << b->at(1) << std::endl;
 	b->print();
 	b->insert(1, 3);
+	b->print();
+	b->remove(0);
 	b->print();
 	delete b;
 	return 0;	

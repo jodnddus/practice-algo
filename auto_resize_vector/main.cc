@@ -34,12 +34,34 @@ public:
 	}
 	int at(int index)
 	{
-		if(index < 0 || index > ntop)
+		try
 		{
-			std::cout << "index out range" << std::endl;
+			if(index < 0 || index > ntop)
+			{
+				throw "at: index out range";
+			}
+			return *(data+index);
+		}
+		catch(const char* st)
+		{
+			std::cout << st << std::endl;
 			return 0;
 		}
-		return *(data+index);
+	}
+	void insert(int index, int item)
+	{
+		try
+		{
+			if(ntop+1 > nsize) throw "insert: over index";
+			for(int i=ntop;i>index;i--)
+				*(data+i) = *(data+i-1);
+			*(data+index) = item;
+			ntop++;
+		}				
+		catch(const char* st)
+		{
+			std::cout << st << std::endl;
+		}
 	}
 };
 
@@ -59,9 +81,11 @@ int main(void)
 	b->append(8);
 	std::cout << "ntop: " << b->size() << std::endl;
 	b->print();
-	b->pop();
 	std::cout<< "at(0): " << b->at(0) << std::endl;
 	std::cout<< "at(1): " << b->at(1) << std::endl;
+	b->print();
+	b->insert(1, 3);
+	b->print();
 	delete b;
 	return 0;	
 }

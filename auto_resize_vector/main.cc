@@ -69,6 +69,12 @@ public:
 			*(data+i) = *(data+i+1);
 		ntop--;
 	}
+	//크기가 다 찻을 때, 크기의 두배를 리사이징한다
+	//아이템을 poping할 때 원래 사이즈의 4분의1이면 반으로 리사이징한다
+	private void resize(int new_size)
+	{
+		
+	}
 };
 
 int main(void)
